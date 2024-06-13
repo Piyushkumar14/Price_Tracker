@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Checker</title>
+    <link href="./css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Check Product Price</h1>
+    <form method="POST">
+        <label for="product_name">Product Name:</label>
+        <input type="text" id="product_name" name="product_name" required>
+        <button type="submit">Check Price</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% if product_data %}
+        <h2>Product Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ product_data.product_name }}</td>
+                    <td>{{ product_data.price }}</td>
+                    <td><a href="{{ product_data.url }}" target="_blank">View Product</a></td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>
